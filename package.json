@@ -1,0 +1,28 @@
+{
+  "name": "kechol",
+  "version": "0.0.1",
+  "description": "kechol.net",
+  "main": "index.html",
+  "dependencies": {
+    "uglify-js": "~2.4.0"
+  },
+  "devDependencies": {
+    "coffee-script": "~1.6.3"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Kechol/kechol.net.git"
+  },
+  "keywords": [
+    "kechol"
+  ],
+  "readme": "This is my site.",
+  "author": "Kazuyuki SUZUKI",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Kechol/kechol.net/issues"
+  }
+}
