@@ -1,27 +1,34 @@
-width = 0; height = 0; canvas = null; ctx = null;
+width = 0
+height = 0
+canvas = null
+ctx = null
 
 init = () ->
-    width  = window.innerWidth
-    height = window.innerHeight
     canvas = document.createElement("canvas")
     return false if !canvas || !canvas.getContext
+
     ctx = canvas.getContext("2d")
+    ctx.globalCompositeOperation = "lighter"
+    width  = window.innerWidth
+    height = window.innerHeight
     canvas.width = width
     canvas.height = height
-    canvas.setAttribute("style", "width: " + width + "px;" + "height: " + height + "px");
-    draw(ctx)
-    document.body.style.background = 'url(' + canvas.toDataURL('image/png') + ')'
 
+    draw()
+    null
+
+window.onresize = ->
+    init()
+    null
 
 draw = () ->
-    return false if width < 80 || height < 80 || !ctx
-    ctx.globalCompositeOperation = "lighter"
-
-    ws = [80, width - 80]
-    hs = [80, height - 80]
+    ws = [width * 0.05, width * 0.95]
+    hs = [height * 0.05, height * 0.95]
     for i in [0..3]
         hue = Math.floor(Math.random() * 361)
         fillGrad(ws[Math.floor(i/2)], hs[i%2], hue)
+    document.body.style.background = 'url(' + canvas.toDataURL('image/png') + ')'
+    null
 
 fillGrad = (wdh, hgt, hue) ->
     grd = ctx.createLinearGradient(wdh, hgt, width/2, height/2)
@@ -35,6 +42,7 @@ fillGrad = (wdh, hgt, hue) ->
     grd.addColorStop(1, "rgba(" + rgb + ", 0)")
     ctx.fillStyle = grd
     ctx.fillRect(0, 0, width, height)
+    null
 
 hsv2rgb = (h,s,v) ->
     if(s == 0)
