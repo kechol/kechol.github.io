@@ -9,16 +9,12 @@ init = () ->
 
     ctx = canvas.getContext("2d")
     ctx.globalCompositeOperation = "lighter"
-    width  = window.innerWidth
-    height = window.innerHeight
+    width  = window.innerWidth || document.documentElement.clientWidth || document.body.clientWidth
+    height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight
     canvas.width = width
     canvas.height = height
 
     draw()
-    null
-
-window.onresize = ->
-    init()
     null
 
 draw = () ->
@@ -27,15 +23,15 @@ draw = () ->
     for i in [0..3]
         hue = Math.floor(Math.random() * 361)
         fillGrad(ws[Math.floor(i/2)], hs[i%2], hue)
-    document.body.style.background = 'url(' + canvas.toDataURL('image/png') + ')'
+    document.body.style.backgroundImage = 'url(' + canvas.toDataURL('image/png') + ')'
     null
 
 fillGrad = (wdh, hgt, hue) ->
     grd = ctx.createLinearGradient(wdh, hgt, width/2, height/2)
     h = hue
-    s = 0.24
+    s = 0.34
     v = 0.98
-    a = 0.6
+    a = 0.7
 
     rgb = hsv2rgb(h, s, v).join(",")
     grd.addColorStop(0, "rgba(" + rgb + "," + a + ")")
@@ -52,19 +48,18 @@ hsv2rgb = (h,s,v) ->
         hi = Math.floor(h / 60) % 6
         f = (h / 60) - hi
         p = v * (1 - s)
-        q = v * (1 - f * s)
-        t = v * (1 - (1 - f) * s)
+        q = if (hi % 2 == 0) then v * (1 - (1 - f) * s) else v * (1 - f * s)
         switch(hi)
             when 0
-                r = v; g = t; b = p
+                r = v; g = q; b = p
             when 1
                 r = q; g = v; b = p
             when 2
-                r = p; g = v; b = t
+                r = p; g = v; b = q
             when 3
                 r = p; g = q; b = v
             when 4
-                r = t; g = p; b = v
+                r = q; g = p; b = v
             when 5
                 r = v; g = p; b = q
             else
