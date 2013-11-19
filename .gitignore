@@ -1,6 +1,7 @@
-.bundle
-.sass-cache
-vendors
 node_modules
-*.js
-*.css
+ruby_vendors
+_site
+.tmp
+.sass-cache
+.bundle
+app/bower_components

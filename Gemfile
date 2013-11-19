@@ -1,5 +1,5 @@
 # A sample Gemfile
 source "https://rubygems.org"
 
-gem "sass"
-gem "coffee-script"
+gem "compass"
+gem "s3_website"
