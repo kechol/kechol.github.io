@@ -1,3 +1,7 @@
+*, ::after, ::before {
+  box-sizing: border-box;
+}
+
 html, body, h1, ul, li {
   margin: 0;
   padding: 0;
